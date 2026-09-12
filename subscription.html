@@ -175,6 +175,289 @@
     <div class="w-full max-w-6xl flex justify-end items-center mb-6 z-10 relative">
         <div class="flex gap-3">
             <button onclick="toggleTheme()" id="theme-toggle" class="btn-secondary px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow-sm" title="Toggle Theme">
+                <span id="theme-icon">â˜€ï¸</span>
+                <span id="theme-label"></span>
+            </button>
+            <button onclick="toggleLang()" id="lang-toggle" class="btn-secondary px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow-sm" title="Toggle Language">
+                <span id="lang-icon">ðŸ‡ºðŸ‡¸</span>
+                <span id="lang-label">EN</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bento Grid Container -->
+    <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-12 gap-6 z-10 relative">
+        
+        <!-- Left Sidebar / Profile (Col span 4) -->
+        <div class="md:col-span-4 flex flex-col gap-6">
+            <!-- Profile Card -->
+            <div class="bento-card p-6 flex flex-col items-center text-center relative overflow-hidden">
+                <div class="absolute top-0 w-full h-24" style="background: linear-gradient(135deg, var(--accent-light) 0%, transparent 100%); opacity: 0.5;"></div>
+                <div class="w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg mb-4 z-10 relative" style="background: var(--bg-card); border: 2px solid var(--accent-border); color: var(--accent);">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                </div>
+                <h1 class="text-2xl font-black tracking-tight z-10 mb-1" style="color: var(--text-primary);">__USER_NAME__</h1>
+                <p class="text-xs font-mono z-10 mb-5" style="color: var(--text-muted);">__USER_ID__</p>
+                <div class="z-10 w-full">
+                    <span id="status-badge" class="px-6 py-2 rounded-xl text-xs font-bold shadow-sm inline-block w-full uppercase tracking-wider"></span>
+                </div>
+            </div>
+
+            <!-- Expiry & General Info -->
+            <div class="bento-card p-6">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-secondary mb-4 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <span data-i18n="expDate">Expiration Date</span>
+                </h3>
+                <div class="flex flex-col gap-1">
+                    <span class="text-2xl font-black" style="color: var(--text-primary);">__EXPIRY_DATE__</span>
+                    <p class="text-xs text-muted font-medium" data-i18n="calendarLocal">Calendar Local Time</p>
+                </div>
+                <div class="mt-6 pt-5 border-t" style="border-color: var(--border-inner);">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-xs font-bold text-secondary">Connection IP</span>
+                        <span class="text-xs font-mono font-semibold" style="color: var(--text-primary);" id="client-ip">Detecting...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support / Help -->
+            <div class="bento-card p-6" style="background: linear-gradient(135deg, var(--bg-card) 0%, var(--accent-light) 200%);">
+                <h3 class="text-sm font-bold flex items-center gap-2 mb-3" style="color: var(--text-primary);">
+                    <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    Help & Support
+                </h3>
+                <p class="text-xs text-secondary mb-4 leading-relaxed">Having trouble connecting? Keep your clients updated or contact support for assistance.</p>
+                <a href="https://t.me/Pwy4_Bot" class="btn-primary w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-sm">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.98 1.26-5.59 3.7-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.05-.49-.83-.27-1.49-.42-1.44-.88.03-.24.36-.48.98-.74 3.84-1.67 6.4-2.78 7.68-3.32 3.64-1.52 4.4-1.79 4.9-1.8.11 0 .36.03.49.14.11.09.14.22.15.34-.01.07-.01.16-.02.26z"/></svg>
+                    👨‍💻 Support
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Main Content (Col span 8) -->
+        <div class="md:col-span-8 flex flex-col gap-6">
+            
+            <!-- Metrics Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Total Usage -->
+                <div class="bento-card p-6 relative overflow-hidden group">
+                    <div class="absolute -right-6 -top-6 w-24 h-24 bg-indigo-500 opacity-5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="flex justify-between items-start mb-4 relative z-10">
+                        <p class="text-xs font-bold uppercase tracking-widest text-secondary" data-i18n="totalUsage">Total Usage</p>
+                        <span class="p-2 rounded-lg" style="background: var(--bg-card-inner); border: 1px solid var(--border-inner);">
+                            <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                        </span>
+                    </div>
+                    <div class="flex items-baseline gap-1.5 mb-4 relative z-10">
+                        <span class="text-3xl font-black" style="color: var(--text-primary);">__TOTAL_GB__</span>
+                        <span class="text-sm font-medium text-secondary">/ __LIMIT_TOTAL_GB__ GB</span>
+                    </div>
+                    __TOTAL_PROGRESS__
+                </div>
+
+                <!-- Daily Usage -->
+                <div class="bento-card p-6 relative overflow-hidden group">
+                    <div class="absolute -right-6 -top-6 w-24 h-24 bg-emerald-500 opacity-5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                    <div class="flex justify-between items-start mb-4 relative z-10">
+                        <p class="text-xs font-bold uppercase tracking-widest text-secondary" data-i18n="dailyUsage">Daily Usage</p>
+                        <span class="p-2 rounded-lg" style="background: var(--bg-card-inner); border: 1px solid var(--border-inner);">
+                            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </span>
+                    </div>
+                    <div class="flex items-baseline gap-1.5 mb-4 relative z-10">
+                        <span class="text-3xl font-black" style="color: var(--text-primary);">__DAILY_GB__</span>
+                        <span class="text-sm font-medium text-secondary">/ __LIMIT_DAILY_GB__ GB</span>
+                    </div>
+                    __DAILY_PROGRESS__
+                </div>
+            </div>
+
+            <!-- Universal Link Setup -->
+            <div class="bento-card p-6 sm:p-8">
+                <div class="flex justify-between items-end mb-6">
+                    <div>
+                        <h3 class="text-lg font-black flex items-center gap-2 mb-1" style="color: var(--text-primary);">
+                            <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                            <span data-i18n="integrationTitle">Integration Connections</span>
+                        </h3>
+                        <p class="text-xs text-secondary" data-i18n="integrationDesc">Add your preferred configuration link.</p>
+                    </div>
+                </div>
+
+                <div class="bento-inner p-5 sm:p-6 border border-accent-border relative overflow-hidden" style="border-color: var(--accent-border);">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background: radial-gradient(circle at 100% 0%, var(--accent) 0%, transparent 40%);"></div>
+                    <div class="relative z-10">
+                        <h4 class="font-bold mb-2 flex items-center gap-2" style="color: var(--text-primary);">
+                            <span data-i18n="universalLink">Universal Auto-Detecting Link</span>
+                            <span class="px-2 py-0.5 rounded text-[9px] uppercase tracking-wider font-bold shadow-sm" style="background: var(--accent); color: white;">Recommended</span>
+                        </h4>
+                        <p class="text-xs text-secondary mb-4 leading-relaxed" data-i18n="universalDesc">This URL automatically detects your client and delivers the optimal format.</p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3 w-full" dir="ltr">
+                            <input type="text" id="link-normal" value="__SYNC_NORMAL__" readonly class="input-field flex-1 px-4 py-3 rounded-xl text-sm font-mono w-full outline-none shadow-inner focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                            <div class="flex gap-2">
+                                <button onclick="copyLink('link-normal')" class="btn-primary flex-1 sm:flex-none px-6 py-3 rounded-xl text-sm font-bold shrink-0 flex justify-center items-center gap-2 shadow-md">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                    <span data-i18n="copy">Copy</span>
+                                </button>
+                                <button onclick="showQRModal('__SYNC_NORMAL__')" class="btn-secondary px-4 py-3 rounded-xl text-sm font-bold shrink-0 shadow-sm flex items-center justify-center">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm14 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 bento-inner p-5 sm:p-6 border border-accent-border relative overflow-hidden" style="border-color: var(--accent-border);">
+                    <div class="absolute inset-0 opacity-5 pointer-events-none" style="background: radial-gradient(circle at 100% 0%, var(--accent) 0%, transparent 40%);"></div>
+                    <div class="relative z-10 space-y-4">
+                        <h4 class="font-bold flex items-center gap-2" style="color: var(--text-primary);">
+                            <span data-i18n="availableFormats">Available Subscription Formats</span>
+                        </h4>
+                        <p class="text-xs text-secondary leading-relaxed" data-i18n="formatsDesc">Use these links to explicitly request specific configuration formats.</p>
+                        
+                               --bg-card-inner: #f9fafb;
+            --bg-input: #f3f4f6;
+            --border-card: #e5e7eb;
+            --border-inner: #e5e7eb;
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --accent: #6366f1;
+            --accent-light: #e0e7ff;
+            --accent-border: #c7d2fe;
+            --accent-hover: #4f46e5;
+            --green-bg: #d1fae5;
+            --green-border: #a7f3d0;
+            --green-text: #059669;
+            --amber-bg: #fef3c7;
+            --amber-border: #fde68a;
+            --amber-text: #d97706;
+            --red-bg: #fee2e2;
+            --red-border: #fecaca;
+            --red-text: #dc2626;
+            --progress-bg: #e5e7eb;
+            --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            --btn-primary-bg: #6366f1;
+            --btn-primary-hover: #4f46e5;
+            --btn-secondary-bg: #f3f4f6;
+            --btn-secondary-hover: #e5e7eb;
+            --modal-bg: rgba(0,0,0,0.5);
+            --modal-card: #ffffff;
+        }
+
+        .dark {
+            --bg-primary: #0b0f19;
+            --bg-card: rgba(17, 24, 39, 0.7);
+            --bg-card-inner: rgba(31, 41, 55, 0.5);
+            --bg-input: #111827;
+            --border-card: rgba(99, 102, 241, 0.15);
+            --border-inner: rgba(99, 102, 241, 0.1);
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent: #818cf8;
+            --accent-light: rgba(99, 102, 241, 0.15);
+            --accent-border: rgba(99, 102, 241, 0.3);
+            --accent-hover: #6366f1;
+            --green-bg: rgba(16, 185, 129, 0.1);
+            --green-border: rgba(16, 185, 129, 0.2);
+            --green-text: #34d399;
+            --amber-bg: rgba(245, 158, 11, 0.1);
+            --amber-border: rgba(245, 158, 11, 0.2);
+            --amber-text: #fbbf24;
+            --red-bg: rgba(239, 68, 68, 0.1);
+            --red-border: rgba(239, 68, 68, 0.2);
+            --red-text: #f87171;
+            --progress-bg: rgba(31, 41, 55, 0.8);
+            --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            --btn-primary-bg: #6366f1;
+            --btn-primary-hover: #4f46e5;
+            --btn-secondary-bg: rgba(31, 41, 55, 0.6);
+            --btn-secondary-hover: rgba(55, 65, 81, 0.8);
+            --modal-bg: rgba(0,0,0,0.8);
+            --modal-card: #1f2937;
+        }
+
+        body {
+            font-family: 'Inter', 'Vazirmatn', sans-serif;
+            background: var(--bg-primary) !important;
+            color: var(--text-primary);
+            transition: background 0.3s, color 0.3s;
+            -webkit-font-smoothing: antialiased;
+        }
+        [lang="fa"] body { font-family: 'Vazirmatn', sans-serif; }
+        
+        .bento-card {
+            background: var(--bg-card) !important;
+            border: 1px solid var(--border-card) !important;
+            box-shadow: var(--shadow-card) !important;
+            border-radius: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        
+        .bento-inner {
+            background: var(--bg-card-inner);
+            border: 1px solid var(--border-inner);
+            border-radius: 1rem;
+            transition: all 0.3s;
+        }
+
+        .input-field {
+            background: var(--bg-input);
+            border: 1px solid var(--border-inner);
+            color: var(--text-primary);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+        
+        .btn-primary { background: var(--btn-primary-bg); color: white; transition: all 0.2s ease; }
+        .btn-primary:hover { background: var(--btn-primary-hover); transform: translateY(-1px); }
+        .btn-secondary { background: var(--btn-secondary-bg); color: var(--text-primary); border: 1px solid var(--border-inner); transition: all 0.2s ease; }
+        .btn-secondary:hover { background: var(--btn-secondary-hover); transform: translateY(-1px); }
+        .text-secondary { color: var(--text-secondary); }
+        .text-muted { color: var(--text-muted); }
+        .progress-bar-bg { background: var(--progress-bg); }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        
+        .modal-overlay { background: var(--modal-bg); backdrop-filter: blur(8px); }
+        .modal-card { background: var(--modal-card); border: 1px solid var(--border-card); }
+        
+        .app-btn {
+            background: var(--bg-card-inner);
+            border: 1px solid var(--border-inner);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+        .app-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+        
+        .glow-effect {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--accent);
+            filter: blur(80px);
+            opacity: 0.15;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-start fade-in relative overflow-x-hidden">
+    <!-- Ambient Background Glows -->
+    <div class="glow-effect top-0 left-10"></div>
+    <div class="glow-effect bottom-20 right-10" style="background: #34d399;"></div>
+
+    <!-- Theme & Language Toggle -->
+    <div class="w-full max-w-6xl flex justify-end items-center mb-6 z-10 relative">
+        <div class="flex gap-3">
+            <button onclick="toggleTheme()" id="theme-toggle" class="btn-secondary px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shadow-sm" title="Toggle Theme">
                 <span id="theme-icon">☀️</span>
                 <span id="theme-label"></span>
             </button>
